@@ -1,0 +1,1252 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LUMI | Encontros que iluminam</title>
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial, Helvetica, sans-serif;
+scroll-behavior:smooth;transition:transform 0.45s ease;
+}
+
+body{
+background:#060612;
+color:#fff;
+overflow-x:hidden;
+}
+
+header{
+position:fixed;
+top:0;
+width:100%;
+padding:18px 8%;
+display:flex;
+justify-content:space-between;
+align-items:center;
+background:rgba(6,6,18,0.75);
+backdrop-filter:blur(14px);
+z-index:999;
+border-bottom:1px solid rgba(196,181,253,0.12);
+}
+
+header nav{
+position:absolute;
+left:50%;
+transform:translateX(-50%);
+display:flex;
+align-items:center;
+gap:38px;
+}
+
+.logo-area{
+display:flex;
+align-items:center;
+gap:12px;
+font-weight:900;
+letter-spacing:3px;
+}
+
+.logo-area img{
+width:54px;
+height:54px;
+object-fit:cover;
+object-position:center;
+border-radius:14px;
+box-shadow:0 0 25px rgba(168,85,247,0.35);
+}
+
+.logo-area span{
+font-size:1.4rem;
+}
+
+nav a{
+color:#fff;
+text-decoration:none;
+margin-left:0;
+font-weight:bold;
+transition:0.3s;
+}
+
+nav a:hover{
+color:#c084fc;
+}
+
+.hero{
+min-height:100vh;
+display:grid;
+grid-template-columns:1fr 1fr;
+align-items:center;
+padding:135px 8% 90px;
+gap:55px;
+background:
+radial-gradient(circle at top left,rgba(124,58,237,0.45),transparent 32%),
+radial-gradient(circle at bottom right,rgba(14,165,233,0.20),transparent 28%),
+linear-gradient(135deg,#060612,#11112b 55%,#05050c);
+}
+
+.hero h1{
+font-size:4.4rem;
+line-height:1.05;
+margin-bottom:22px;
+}
+
+.hero h1 span{
+background:linear-gradient(90deg,#a855f7,#c084fc,#38bdf8);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+}
+
+.hero p{
+font-size:1.17rem;
+color:#d8d4f2;
+margin-bottom:30px;
+max-width:620px;
+line-height:1.6;
+}
+
+.btn{
+display:inline-block;
+padding:15px 28px;
+border-radius:999px;
+text-decoration:none;
+font-weight:bold;
+margin-right:15px;
+transition:0.3s;
+}
+
+.btn-primary{
+background:linear-gradient(90deg,#7c3aed,#a855f7,#38bdf8);
+color:#fff;
+box-shadow:0 0 30px rgba(168,85,247,0.35);
+}
+
+.btn-secondary{
+border:1px solid rgba(255,255,255,0.45);
+color:#fff;
+}
+
+.btn:hover{
+transform:translateY(-5px) scale(1.03);
+}
+
+.hero-showcase{
+position:relative;
+height:560px;
+display:flex;
+align-items:center;
+justify-content:center;
+perspective:1200px;
+}
+
+.hero-carousel{
+position:relative;
+width:100%;
+height:460px;
+display:flex;
+align-items:center;
+justify-content:center;
+}
+
+.hero-slide{
+position:absolute;
+width:260px;
+height:390px;
+border-radius:30px;
+overflow:hidden;
+background:#11112b;
+box-shadow:0 30px 80px rgba(0,0,0,0.55);
+border:1px solid rgba(196,181,253,0.18);
+transition:all 0.7s ease;
+opacity:0;
+transform:scale(0.75) translateX(0) rotateY(0deg);
+}
+
+.hero-slide img{
+width:100%;
+height:100%;
+object-fit:cover;
+filter:saturate(1.12) contrast(1.08);
+}
+
+.hero-slide::after{
+content:"";
+position:absolute;
+inset:0;
+background:linear-gradient(transparent,rgba(0,0,0,0.82));
+}
+
+.hero-slide-content{
+position:absolute;
+bottom:0;
+left:0;
+width:100%;
+padding:22px;
+z-index:2;
+}
+
+.hero-slide-content strong{
+display:block;
+font-size:1.25rem;
+margin-bottom:7px;
+}
+
+.hero-slide-content span{
+font-size:0.92rem;
+color:#e5e7eb;
+line-height:1.35;
+}
+
+.hero-slide.active{
+opacity:1;
+z-index:5;
+width:340px;
+height:470px;
+transform:scale(1) translateX(0) rotateY(0deg);
+border-color:rgba(168,85,247,0.8);
+box-shadow:0 0 45px rgba(168,85,247,0.32),0 35px 95px rgba(0,0,0,0.65);
+}
+
+.hero-slide.left{
+opacity:0.72;
+z-index:4;
+transform:scale(0.86) translateX(-260px) rotateY(18deg);
+}
+
+.hero-slide.far-left{
+opacity:0.45;
+z-index:3;
+transform:scale(0.72) translateX(-445px) rotateY(26deg);
+}
+
+.hero-slide.right{
+opacity:0.72;
+z-index:4;
+transform:scale(0.86) translateX(260px) rotateY(-18deg);
+}
+
+.hero-slide.far-right{
+opacity:0.45;
+z-index:3;
+transform:scale(0.72) translateX(445px) rotateY(-26deg);
+}
+
+.hero-arrow{
+position:absolute;
+top:50%;
+transform:translateY(-50%);
+width:54px;
+height:54px;
+border-radius:50%;
+border:1px solid rgba(196,181,253,0.45);
+background:rgba(10,10,28,0.65);
+backdrop-filter:blur(10px);
+color:#fff;
+font-size:2.1rem;
+z-index:10;
+cursor:pointer;
+transition:0.3s;
+}
+
+.hero-arrow:hover{
+background:rgba(168,85,247,0.35);
+box-shadow:0 0 28px rgba(168,85,247,0.45);
+}
+
+.hero-arrow.prev{left:-52px;}
+.hero-arrow.next{right:-52px;}
+
+.hero-dots{
+position:absolute;
+bottom:18px;
+left:50%;
+transform:translateX(-50%);
+display:flex;
+gap:12px;
+z-index:10;
+}
+
+.hero-dot{
+width:28px;
+height:7px;
+border-radius:999px;
+background:rgba(255,255,255,0.25);
+transition:0.3s;
+}
+
+.hero-dot.active{
+width:45px;
+background:linear-gradient(90deg,#a855f7,#38bdf8);
+box-shadow:0 0 18px rgba(168,85,247,0.45);
+}
+
+section{
+padding:92px 8%;
+}
+
+.title{
+font-size:3.2rem;
+margin-bottom:18px;
+color:#c084fc;
+}
+
+.text{
+color:#d8d4f2;
+font-size:1.1rem;
+max-width:900px;
+line-height:1.65;
+}
+
+.dark-section{
+background:#09091c;
+}
+
+.cards{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:25px;
+margin-top:42px;
+}
+
+.card{
+background:linear-gradient(180deg,#151536,#0d0d22);
+border-radius:28px;
+overflow:hidden;
+border:1px solid rgba(196,181,253,0.12);
+transition:0.3s;
+}
+
+.card:hover{
+transform:translateY(-10px);
+box-shadow:0 24px 60px rgba(124,58,237,0.28);
+border-color:rgba(168,85,247,0.6);
+}
+
+.card img{
+width:100%;
+height:210px;
+object-fit:cover;
+filter:saturate(1.08) contrast(1.05);
+}
+
+.card-content{
+padding:28px;
+}
+
+.card h3{
+color:#e9d5ff;
+margin-bottom:10px;
+font-size:1.35rem;
+}
+
+.card p{
+color:#d8d4f2;
+line-height:1.5;
+}
+
+.tag{
+display:inline-block;
+margin-bottom:14px;
+padding:7px 12px;
+border-radius:999px;
+background:rgba(168,85,247,0.16);
+color:#c084fc;
+font-size:0.78rem;
+font-weight:bold;
+text-transform:uppercase;
+}
+
+.experiences{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:26px;
+margin-top:42px;
+}
+
+.experience{
+position:relative;
+min-height:360px;
+border-radius:32px;
+overflow:hidden;
+background:#11112b;
+border:1px solid rgba(196,181,253,0.16);
+box-shadow:0 25px 70px rgba(0,0,0,0.35);
+transition:0.35s;
+}
+
+.experience:hover{
+transform:translateY(-12px) scale(1.02);
+box-shadow:0 30px 85px rgba(168,85,247,0.28);
+border-color:rgba(168,85,247,0.65);
+}
+
+.experience img{
+width:100%;
+height:100%;
+position:absolute;
+inset:0;
+object-fit:cover;
+filter:saturate(1.08) contrast(1.08);
+transition:0.55s;
+}
+
+.experience:hover img{
+transform:scale(1.08);
+filter:saturate(1.22) contrast(1.12);
+}
+
+.experience::after{
+content:"";
+position:absolute;
+inset:0;
+background:linear-gradient(180deg,rgba(6,6,18,0.08),rgba(6,6,18,0.45),rgba(0,0,0,0.92));
+z-index:1;
+}
+
+.experience-content{
+position:absolute;
+left:0;
+bottom:0;
+width:100%;
+padding:28px;
+z-index:2;
+}
+
+.experience-content span{
+display:inline-block;
+margin-bottom:12px;
+padding:8px 14px;
+border-radius:999px;
+background:rgba(168,85,247,0.22);
+color:#f3e8ff;
+font-size:0.78rem;
+font-weight:bold;
+text-transform:uppercase;
+border:1px solid rgba(255,255,255,0.16);
+}
+
+.experience-content h3{
+font-size:1.65rem;
+color:#fff;
+margin-bottom:10px;
+}
+
+.experience-content p{
+color:#e5e7eb;
+line-height:1.45;
+font-size:0.98rem;
+}
+
+.levels{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+gap:24px;
+margin-top:42px;
+}
+
+.level{
+position:relative;
+background:linear-gradient(180deg,rgba(25,25,58,0.95),rgba(8,8,22,0.98));
+padding:34px 26px;
+border-radius:30px;
+border:1px solid rgba(255,255,255,0.12);
+transition:0.35s;
+min-height:340px;
+overflow:hidden;
+text-align:center;
+}
+
+.level::before{
+content:"";
+position:absolute;
+inset:0;
+background:radial-gradient(circle at top,rgba(255,255,255,0.10),transparent 45%);
+pointer-events:none;
+}
+
+.level:hover{
+transform:translateY(-12px) scale(1.03);
+box-shadow:0 28px 80px rgba(168,85,247,0.30);
+}
+
+.level-icon{
+width:110px;
+height:110px;
+margin:0 auto 20px;
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:4rem;
+background:rgba(255,255,255,0.06);
+border:1px solid rgba(255,255,255,0.15);
+box-shadow:0 0 35px rgba(255,255,255,0.08);
+}
+
+.level strong{
+display:block;
+font-size:2.2rem;
+margin-bottom:12px;
+}
+
+.level p{
+color:#e5e7eb;
+line-height:1.45;
+}
+
+.level small{
+display:inline-block;
+margin-top:18px;
+padding:8px 16px;
+border-radius:999px;
+font-weight:bold;
+background:rgba(255,255,255,0.08);
+}
+
+.bronze{border-color:#9a673d;box-shadow:0 0 30px rgba(154,103,61,0.20);}
+.bronze .level-icon{color:#cd7f32;box-shadow:0 0 45px rgba(205,127,50,0.22);}
+.prata{border-color:#cbd5e1;box-shadow:0 0 30px rgba(203,213,225,0.16);}
+.prata .level-icon{color:#e5e7eb;box-shadow:0 0 45px rgba(203,213,225,0.22);}
+.ouro{border-color:#a78bfa;box-shadow:0 0 30px rgba(167,139,250,0.25);}
+.ouro .level-icon{color:#c084fc;box-shadow:0 0 45px rgba(192,132,252,0.28);}
+.diamante{border-color:#38bdf8;box-shadow:0 0 30px rgba(56,189,248,0.25);}
+.diamante .level-icon{color:#38bdf8;box-shadow:0 0 45px rgba(56,189,248,0.30);}
+
+.hit-box{
+margin-top:45px;
+display:grid;
+grid-template-columns:0.85fr 1.15fr;
+gap:36px;
+align-items:center;
+background:
+radial-gradient(circle at top left,rgba(236,72,153,0.28),transparent 35%),
+linear-gradient(135deg,#2e1065,#0f1020 45%,#111827);
+padding:42px;
+border-radius:38px;
+border:1px solid rgba(244,114,182,0.35);
+box-shadow:0 35px 100px rgba(124,58,237,0.32);
+overflow:hidden;
+}
+
+.hit-box img{
+width:100%;
+height:390px;
+object-fit:cover;
+border-radius:30px;
+box-shadow:0 25px 70px rgba(0,0,0,0.45);
+}
+
+.hit-box h3{
+font-size:4.8rem;
+line-height:0.9;
+margin-bottom:10px;
+background:linear-gradient(90deg,#f5d0fe,#c084fc,#38bdf8);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+}
+
+.hit-badge{
+display:inline-block;
+padding:10px 18px;
+border-radius:999px;
+border:1px solid rgba(255,255,255,0.35);
+color:#f5d0fe;
+font-weight:bold;
+margin-bottom:18px;
+}
+
+.hit-benefits{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(170px,1fr));
+gap:14px;
+margin-top:24px;
+}
+
+.hit-benefit{
+background:rgba(255,255,255,0.07);
+border:1px solid rgba(255,255,255,0.12);
+border-radius:20px;
+padding:18px;
+}
+
+.hit-benefit strong{
+display:block;
+font-size:1.05rem;
+color:#f5d0fe;
+margin-bottom:6px;
+}
+
+.hit-benefit p{
+font-size:0.92rem;
+color:#e5e7eb;
+line-height:1.35;
+}
+
+.forms{
+display:grid;
+grid-template-columns:1.35fr 0.65fr;
+gap:34px;
+margin-top:50px;
+}
+
+form{
+background:linear-gradient(180deg,rgba(20,20,48,0.96),rgba(10,10,28,0.96));
+padding:38px;
+border-radius:34px;
+border:1px solid rgba(196,181,253,0.18);
+box-shadow:0 28px 80px rgba(0,0,0,0.32);
+position:relative;
+overflow:hidden;
+}
+
+form::before{
+content:"";
+position:absolute;
+top:-80px;
+right:-80px;
+width:190px;
+height:190px;
+background:radial-gradient(circle,rgba(168,85,247,0.28),transparent 65%);
+pointer-events:none;
+}
+
+form h3{
+margin-bottom:8px;
+font-size:1.9rem;
+color:#c084fc;
+}
+
+.form-subtitle{
+color:#a8a5c9;
+font-size:0.95rem;
+margin-bottom:24px;
+line-height:1.45;
+}
+
+.form-grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:16px;
+}
+
+.form-group{
+display:flex;
+flex-direction:column;
+gap:8px;
+}
+
+.form-group.full{
+grid-column:1 / -1;
+}
+
+.form-group label{
+font-size:0.82rem;
+font-weight:bold;
+color:#d8d4f2;
+letter-spacing:0.3px;
+}
+
+input,select{
+width:100%;
+padding:15px 16px;
+border:none;
+border-radius:16px;
+background:#070716;
+color:#fff;
+outline:1px solid rgba(255,255,255,0.10);
+transition:0.3s;
+}
+
+select{
+appearance:none;
+background-image:linear-gradient(45deg,transparent 50%,#c084fc 50%),linear-gradient(135deg,#c084fc 50%,transparent 50%);
+background-position:calc(100% - 20px) 50%,calc(100% - 14px) 50%;
+background-size:6px 6px,6px 6px;
+background-repeat:no-repeat;
+}
+
+input::placeholder{
+color:#8f8aa8;
+}
+
+input:focus,select:focus{
+outline:1px solid #a855f7;
+box-shadow:0 0 0 4px rgba(168,85,247,0.14);
+}
+
+.form-note{
+margin-top:16px;
+font-size:0.82rem;
+color:#9ca3af;
+line-height:1.4;
+}
+
+.login-box{
+padding:28px;
+max-width:420px;
+justify-self:end;
+height:fit-content;
+}
+
+.login-box h3{
+font-size:1.7rem;
+margin-bottom:18px;
+}
+
+.login-box input{
+margin-bottom:14px;
+}
+
+.login-box button{
+margin-top:6px;
+}
+
+button{
+width:100%;
+padding:14px;
+border:none;
+border-radius:999px;
+font-weight:bold;
+cursor:pointer;
+background:linear-gradient(90deg,#7c3aed,#a855f7,#38bdf8);
+color:#fff;
+}
+
+footer{
+text-align:center;
+padding:42px;
+background:#05050c;
+color:#9ca3af;
+}
+
+/* ANIMAÇÕES E INTERAÇÕES */
+@keyframes brilhoLumi{
+0%,100%{box-shadow:0 0 22px rgba(168,85,247,0.35);}
+50%{box-shadow:0 0 42px rgba(56,189,248,0.45);}
+}
+
+@keyframes flutuar{
+0%,100%{transform:translateY(0);}
+50%{transform:translateY(-14px);}
+}
+
+@keyframes pulsar{
+0%,100%{transform:scale(1);}
+50%{transform:scale(1.05);}
+}
+
+.logo-area img{
+animation:brilhoLumi 3s ease-in-out infinite;
+}
+
+.hero-img-box{
+animation:flutuar 5s ease-in-out infinite;
+}
+
+.hero-badge{
+animation:pulsar 2.5s ease-in-out infinite;
+}
+
+.card img{
+transition:transform 0.55s ease, filter 0.55s ease;
+}
+
+.card:hover img{
+transform:scale(1.08);
+filter:saturate(1.25) contrast(1.12);
+}
+
+.level:hover{
+transform:translateY(-12px) scale(1.03);
+box-shadow:0 24px 70px rgba(168,85,247,0.28);
+}
+
+.hit-box:hover{
+transform:scale(1.015);
+box-shadow:0 35px 100px rgba(56,189,248,0.28);
+}
+
+.btn:hover, button:hover{
+filter:brightness(1.18);
+box-shadow:0 0 35px rgba(168,85,247,0.45);
+}
+
+.animate{
+opacity:0;
+transform:translateY(45px);
+transition:opacity 0.85s ease, transform 0.85s ease;
+}
+
+.animate.show{
+opacity:1;
+transform:translateY(0);
+}
+
+@media(max-width:900px){
+.hero,.forms,.hit-box{
+grid-template-columns:1fr;
+}
+.hero h1{
+font-size:3rem;
+}
+nav{
+display:none;
+}
+.hero-img-box img{
+height:350px;
+}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="logo-area">
+<img src="lumi-logo.png" alt="Logo LUMI">
+<span>LUMI</span>
+</div>
+
+<nav>
+<a href="#sobre">Sobre</a>
+<a href="#funciona">Como funciona</a>
+<a href="#eventos">Eventos</a>
+<a href="#niveis">Níveis</a>
+<a href="#cadastro">Entrar</a>
+</nav>
+</header>
+
+<section class="hero">
+<div>
+<h1>Conexões que <span>iluminam</span></h1>
+<p>O LUMI conecta você a eventos reais, experiências secretas, novas amizades e momentos únicos. Um app feito para transformar a rotina em descoberta.</p>
+<a href="#cadastro" class="btn btn-primary">Quero participar</a>
+<a href="#eventos" class="btn btn-secondary">Ver eventos</a>
+</div>
+
+<div class="hero-showcase">
+<button class="hero-arrow prev" onclick="moverHero(-1)">‹</button>
+<button class="hero-arrow next" onclick="moverHero(1)">›</button>
+
+<div class="hero-carousel" id="heroCarousel">
+<div class="hero-slide active">
+<img src="https://images.unsplash.com/photo-1506157786151-b8491531f063?auto=format&fit=crop&w=900&q=80" alt="Festival">
+<div class="hero-slide-content"><strong>Festivais</strong><span>Música, energia e pessoas incríveis.</span></div>
+</div>
+
+<div class="hero-slide right">
+<img src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&w=900&q=80" alt="Bares e drinks">
+<div class="hero-slide-content"><strong>Bares & Drinks</strong><span>Bons drinks, conversas e conexões.</span></div>
+</div>
+
+<div class="hero-slide far-right">
+<img src="https://images.unsplash.com/photo-1517457373958-b7bdd4587205?auto=format&fit=crop&w=900&q=80" alt="Encontros sociais">
+<div class="hero-slide-content"><strong>Encontros</strong><span>Ambientes únicos para conversar.</span></div>
+</div>
+
+<div class="hero-slide far-left">
+<img src="https://images.unsplash.com/photo-1531058020387-3be344556be6?auto=format&fit=crop&w=900&q=80" alt="Cultura">
+<div class="hero-slide-content"><strong>Cultura</strong><span>Arte, exposições e experiências culturais.</span></div>
+</div>
+
+<div class="hero-slide left">
+<img src="https://images.unsplash.com/photo-1551632811-561732d1e306?auto=format&fit=crop&w=900&q=80" alt="Trilhas">
+<div class="hero-slide-content"><strong>Trilhas</strong><span>Aventura, natureza e novos grupos.</span></div>
+</div>
+</div>
+
+<div class="hero-dots" id="heroDots"></div>
+</div>
+</section>
+
+<section id="sobre">
+<h2 class="title">Nossa História</h2>
+<p class="text">O LUMI nasceu da união de um <strong>grupo de amigos</strong> com ideias diferentes, mas com o mesmo desejo: criar uma forma mais leve, moderna e real de aproximar pessoas. Assim, o LUMI é um app feito para conectar pessoas, revelar novos lugares, criar histórias reais e oferecer a possibilidade de cada usuário criar seu próprio evento, lucrar com suas ideias e ser reconhecido dentro da plataforma.</p>
+
+<div class="cards">
+<div class="card">
+<img src="https://images.unsplash.com/photo-1527529482837-4698179dc6ce?auto=format&fit=crop&w=900&q=80" alt="Amigos em evento">
+<div class="card-content">
+<span class="tag">Conexão</span>
+<h3>Encontros reais</h3>
+<p>Eventos presenciais pensados para aproximar pessoas fora do ambiente digital.</p>
+</div>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?auto=format&fit=crop&w=900&q=80" alt="Evento com iluminação">
+<div class="card-content">
+<span class="tag">Descoberta</span>
+<h3>Experiências únicas</h3>
+<p>Rolês culturais, noites temáticas, eventos secretos e experiências selecionadas.</p>
+</div>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=900&q=80" alt="Show ao vivo">
+<div class="card-content">
+<span class="tag">Energia</span>
+<h3>Momentos memoráveis</h3>
+<p>O Lumier participa, conhece pessoas e desbloqueia novas possibilidades dentro do app.</p>
+</div>
+</div>
+</div>
+</section>
+
+<section id="eventos">
+<h2 class="title">Tipos de eventos</h2>
+<p class="text">Explore diferentes experiências dentro do LUMI. Sempre existe algo novo para descobrir.</p>
+
+<div style="margin-top:40px;position:relative;max-width:1200px;margin-left:auto;margin-right:auto;">
+
+<button onclick="moverCarrossel(-1)" style="position:absolute;left:-28px;top:45%;transform:translateY(-50%);width:60px;height:120px;background:rgba(255,255,255,0.12);backdrop-filter:blur(10px);border:none;border-radius:20px;color:#fff;font-size:3rem;z-index:10;cursor:pointer;box-shadow:0 10px 30px rgba(0,0,0,0.35);">‹</button>
+
+<button onclick="moverCarrossel(1)" style="position:absolute;right:-28px;top:45%;transform:translateY(-50%);width:60px;height:120px;background:rgba(255,255,255,0.12);backdrop-filter:blur(10px);border:none;border-radius:20px;color:#fff;font-size:3rem;z-index:10;cursor:pointer;box-shadow:0 10px 30px rgba(0,0,0,0.35);">›</button>
+
+<div id="carrosselEventos" style="display:flex;overflow-x:hidden;gap:22px;padding:15px 10px 25px;scroll-snap-type:x mandatory;scroll-behavior:smooth;scroll-padding:20px;">
+
+<div style="min-width:360px;height:430px;position:relative;border-radius:30px;overflow:hidden;scroll-snap-align:center;flex:none;box-shadow:0 20px 60px rgba(0,0,0,0.35);">
+<img src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&w=900&q=80" style="width:100%;height:100%;object-fit:cover;">
+<div style="position:absolute;bottom:0;width:100%;padding:25px;background:linear-gradient(transparent,rgba(0,0,0,0.85));font-size:1.4rem;font-weight:bold;">Bares & Drinks</div>
+</div>
+
+<div style="min-width:360px;height:430px;position:relative;border-radius:30px;overflow:hidden;scroll-snap-align:center;flex:none;box-shadow:0 20px 60px rgba(0,0,0,0.35);">
+<img src="https://images.unsplash.com/photo-1506157786151-b8491531f063?auto=format&fit=crop&w=900&q=80" style="width:100%;height:100%;object-fit:cover;">
+<div style="position:absolute;bottom:0;width:100%;padding:25px;background:linear-gradient(transparent,rgba(0,0,0,0.85));font-size:1.4rem;font-weight:bold;">Festivais</div>
+</div>
+
+<div style="min-width:360px;height:430px;position:relative;border-radius:30px;overflow:hidden;scroll-snap-align:center;flex:none;box-shadow:0 20px 60px rgba(0,0,0,0.35);">
+<img src="https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&w=900&q=80" style="width:100%;height:100%;object-fit:cover;">
+<div style="position:absolute;bottom:0;width:100%;padding:25px;background:linear-gradient(transparent,rgba(0,0,0,0.85));font-size:1.4rem;font-weight:bold;">Esportes</div>
+</div>
+
+<div style="min-width:360px;height:430px;position:relative;border-radius:30px;overflow:hidden;scroll-snap-align:center;flex:none;box-shadow:0 20px 60px rgba(0,0,0,0.35);">
+<img src="https://images.unsplash.com/photo-1521587760476-6c12a4b040da?auto=format&fit=crop&w=900&q=80" style="width:100%;height:100%;object-fit:cover;">
+<div style="position:absolute;bottom:0;width:100%;padding:25px;background:linear-gradient(transparent,rgba(0,0,0,0.85));font-size:1.4rem;font-weight:bold;">Encontros Literários</div>
+</div>
+
+<div style="min-width:360px;height:430px;position:relative;border-radius:30px;overflow:hidden;scroll-snap-align:center;flex:none;box-shadow:0 20px 60px rgba(0,0,0,0.35);">
+<img src="https://images.unsplash.com/photo-1551632811-561732d1e306?auto=format&fit=crop&w=900&q=80" style="width:100%;height:100%;object-fit:cover;">
+<div style="position:absolute;bottom:0;width:100%;padding:25px;background:linear-gradient(transparent,rgba(0,0,0,0.85));font-size:1.4rem;font-weight:bold;">Trilhas</div>
+</div>
+
+<div style="min-width:360px;height:430px;position:relative;border-radius:30px;overflow:hidden;scroll-snap-align:center;flex:none;box-shadow:0 20px 60px rgba(0,0,0,0.35);">
+<img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=900&q=80" style="width:100%;height:100%;object-fit:cover;">
+<div style="position:absolute;bottom:0;width:100%;padding:25px;background:linear-gradient(transparent,rgba(0,0,0,0.85));font-size:1.4rem;font-weight:bold;">Jogos Interativos</div>
+</div>
+
+</div>
+</div>
+
+<div style="height:25px"></div>
+
+<h2 class="title" style="color:#fff;max-width:760px;">
+Uma experiência feita para despertar curiosidade
+</h2>
+
+<p class="text" style="max-width:760px;color:#fff;">
+No LUMI, cada evento começa antes do encontro. O aplicativo cria expectativa, sugere conexões e transforma a cidade em um espaço de descoberta.
+</p>
+
+<div class="cards" style="grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px;">
+
+<div class="card" style="padding:32px;background:#151529;border-radius:26px;">
+<div style="font-size:2.3rem;margin-bottom:18px;">🌙</div>
+<h3 style="color:#ffd400;">Eventos surpresa</h3>
+<p>Receba pistas sobre experiências exclusivas e descubra o local completo próximo ao horário do evento.</p>
+</div>
+
+<div class="card" style="padding:32px;background:#151529;border-radius:26px;">
+<div style="font-size:2.3rem;margin-bottom:18px;">💫</div>
+<h3 style="color:#ffd400;">Match social</h3>
+<p>Encontre pessoas com interesses parecidos e participe de eventos onde a interação acontece naturalmente.</p>
+</div>
+
+<div class="card" style="padding:32px;background:#151529;border-radius:26px;">
+<div style="font-size:2.3rem;margin-bottom:18px;">🏆</div>
+<h3 style="color:#ffd400;">Níveis e conquistas</h3>
+<p>Participe de experiências, desbloqueie badges e suba de nível para acessar eventos especiais.</p>
+</div>
+
+<div class="card" style="padding:32px;background:#151529;border-radius:26px;border-color:rgba(255,212,0,0.25);">
+<div style="font-size:2.3rem;margin-bottom:18px;">🔔</div>
+<h3 style="color:#ffd400;">Convites limitados</h3>
+<p>Alguns eventos aparecem por tempo limitado, criando aquela vontade de entrar antes que acabe.</p>
+</div>
+
+</div>
+</section>
+
+<section id="niveis" class="dark-section">
+<h2 class="title">Níveis do LUMI</h2>
+<p class="text">Quanto mais o usuário participa, interage e vive experiências, mais ele evolui dentro do aplicativo.</p>
+
+<div class="levels">
+<div class="level bronze">
+<div class="level-icon">⭐</div>
+<strong>Bronze</strong>
+<p>Primeiros passos no app. Ideal para quem está começando a explorar eventos e conhecer pessoas.</p>
+<small>Iniciante</small>
+</div>
+
+<div class="level prata">
+<div class="level-icon">✦</div>
+<strong>Prata</strong>
+<p>Usuário ativo, com maior presença nos eventos e acesso a algumas oportunidades antecipadas.</p>
+<small>Em evolução</small>
+</div>
+
+<div class="level ouro">
+<div class="level-icon">👑</div>
+<strong>Ouro</strong>
+<p>Destaque social dentro do app, com convites mais exclusivos e experiências premium.</p>
+<small>Destaque</small>
+</div>
+
+<div class="level diamante">
+<div class="level-icon">💎</div>
+<strong>Diamante</strong>
+<p>Elite LUMI, com acesso a eventos secretos, brindes e prioridade em experiências selecionadas.</p>
+<small>Elite</small>
+</div>
+</div>
+
+<div class="hit-box">
+<img src="https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?auto=format&fit=crop&w=1000&q=80" alt="Usuário HIT em evento VIP">
+
+<div>
+<span class="hit-badge">LUMIER SUPREMO</span>
+<h3>HIT</h3>
+<p class="text">Acima de todos os níveis está o <strong>HIT</strong>, o maior cargo dentro do LUMI. O usuário HIT tem acesso total aos eventos VIPs, pode criar e organizar eventos próprios e ainda lucrar com experiências criadas dentro da plataforma.</p>
+
+<div class="hit-benefits">
+<div class="hit-benefit">
+<strong>🎟️ Acesso VIP</strong>
+<p>Entrada em eventos secretos, premium e exclusivos.</p>
+</div>
+
+<div class="hit-benefit">
+<strong>🗓️ Criar eventos</strong>
+<p>Organize experiências, convide pessoas e defina regras.</p>
+</div>
+
+<div class="hit-benefit">
+<strong>📈 Lucrar com isso</strong>
+<p>Ganhe com eventos próprios e experiências especiais.</p>
+</div>
+
+<div class="hit-benefit">
+<strong>👑 Visibilidade</strong>
+<p>Destaque máximo dentro da comunidade LUMI.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<section id="cadastro">
+<h2 class="title">Entre para o LUMI</h2>
+<p class="text">Inscreva-se para receber acesso antecipado, convites especiais e novidades do app.</p>
+
+<div class="forms">
+<form>
+<h3>Inscrever-se</h3>
+<p class="form-subtitle">Monte seu perfil para receber convites mais parecidos com você.</p>
+
+<div class="form-grid">
+<div class="form-group full">
+<label>Nome completo</label>
+<input type="text" placeholder="Digite seu nome">
+</div>
+
+<div class="form-group">
+<label>E-mail</label>
+<input type="email" placeholder="seuemail@email.com">
+</div>
+
+<div class="form-group">
+<label>Idade</label>
+<input type="number" placeholder="Ex: 22">
+</div>
+
+<div class="form-group">
+<label>Sexo</label>
+<select>
+<option>Selecione</option>
+<option>Masculino</option>
+<option>Feminino</option>
+<option>Outro</option>
+<option>Prefiro não informar</option>
+</select>
+</div>
+
+<div class="form-group">
+<label>Cidade</label>
+<input type="text" placeholder="Sua cidade">
+</div>
+
+<div class="form-group full">
+<label>Interesse principal</label>
+<select>
+<option>Escolha seu interesse</option>
+<option>Novas amizades</option>
+<option>Relacionamento</option>
+<option>Networking</option>
+<option>Eventos VIP</option>
+<option>Eventos culturais</option>
+<option>Quero virar HIT</option>
+</select>
+</div>
+
+<div class="form-group">
+<label>Evento favorito</label>
+<select>
+<option>Escolha uma categoria</option>
+<option>Bares & Drinks</option>
+<option>Festivais</option>
+<option>Futebol</option>
+<option>Clube do Livro</option>
+<option>Trilhas</option>
+<option>Escape Room</option>
+<option>Eventos secretos</option>
+</select>
+</div>
+
+<div class="form-group">
+<label>Faixa etária que prefere conhecer</label>
+<select>
+<option>Sem preferência</option>
+<option>18 a 25 anos</option>
+<option>26 a 35 anos</option>
+<option>36 a 45 anos</option>
+</select>
+</div>
+</div>
+
+<p class="form-note">Ao entrar na lista, você recebe novidades, convites antecipados e experiências selecionadas.</p>
+<button type="button">Entrar na lista</button>
+</form>
+
+<form class="login-box">
+<h3>Entrar</h3>
+<input type="email" placeholder="E-mail">
+<input type="password" placeholder="Senha">
+<button type="button">Acessar conta</button>
+</form>
+</div>
+</section>
+
+<footer style="background:#020204;padding:70px 8% 40px;border-top:1px solid rgba(255,255,255,0.08);">
+
+<p style="color:#9ca3af;font-size:1.1rem;margin-bottom:35px;">Dúvidas? Fale com o time LUMI</p>
+
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:35px;margin-bottom:45px;">
+
+<div>
+<a href="#" style="display:block;color:#d1d5db;margin-bottom:14px;text-decoration:none;">Perguntas frequentes</a>
+<a href="#" style="display:block;color:#d1d5db;margin-bottom:14px;text-decoration:none;">Central de ajuda</a>
+<a href="#" style="display:block;color:#d1d5db;margin-bottom:14px;text-decoration:none;">Como participar</a>
+<a href="#" style="display:block;color:#d1d5db;margin-bottom:14px;text-decoration:none;">Segurança</a>
+</div>
+
+<div>
+<a href="#" style="display:block;color:#d1d5db;margin-bottom:14px;text-decoration:none;">Conta</a>
+<a href="#" style="display:block;color:#d1d5db;margin-bottom:14px;text-decoration:none;">Privacidade</a>
+<a href="#" style="display:block;color:#d1d5db;margin-bottom:14px;text-decoration:none;">Termos de uso</a>
+<a href="#" style="display:block;color:#d1d5db;margin-bottom:14px;text-decoration:none;">Contato</a>
+</div>
+
+<div>
+<a href="#" style="display:block;color:#d1d5db;margin-bottom:14px;text-decoration:none;">Criadores</a>
+<a href="#" style="display:block;color:#d1d5db;margin-bottom:14px;text-decoration:none;">Parcerias</a>
+<a href="#" style="display:block;color:#d1d5db;margin-bottom:14px;text-decoration:none;">Trabalhe conosco</a>
+<a href="#" style="display:block;color:#d1d5db;margin-bottom:14px;text-decoration:none;">Imprensa</a>
+</div>
+
+<div>
+<a href="#" style="display:block;color:#d1d5db;margin-bottom:14px;text-decoration:none;">Instagram</a>
+<a href="#" style="display:block;color:#d1d5db;margin-bottom:14px;text-decoration:none;">Facebook</a>
+<a href="#" style="display:block;color:#d1d5db;margin-bottom:14px;text-decoration:none;">Twitter</a>
+</div>
+
+</div>
+
+<div style="display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;border-top:1px solid rgba(255,255,255,0.08);padding-top:28px;">
+<p style="color:#6b7280;">LUMI Brasil</p>
+<p style="color:#6b7280;">© 2026 LUMI. Todos os direitos reservados.</p>
+</div>
+
+</footer>
+
+<script>
+let heroIndex = 0;
+const heroSlides = document.querySelectorAll('.hero-slide');
+const heroDots = document.getElementById('heroDots');
+
+if (heroDots && heroSlides.length > 0) {
+  heroSlides.forEach((_, index) => {
+    const dot = document.createElement('span');
+    dot.className = 'hero-dot' + (index === 0 ? ' active' : '');
+    dot.onclick = () => {
+      heroIndex = index;
+      atualizarHero();
+    };
+    heroDots.appendChild(dot);
+  });
+}
+
+function atualizarHero() {
+  const classes = ['active', 'right', 'far-right', 'far-left', 'left'];
+
+  heroSlides.forEach((slide, index) => {
+    slide.className = 'hero-slide';
+    const posicao = (index - heroIndex + heroSlides.length) % heroSlides.length;
+    slide.classList.add(classes[posicao]);
+  });
+
+  document.querySelectorAll('.hero-dot').forEach((dot, index) => {
+    dot.classList.toggle('active', index === heroIndex);
+  });
+}
+
+function moverHero(direcao) {
+  heroIndex = (heroIndex + direcao + heroSlides.length) % heroSlides.length;
+  atualizarHero();
+}
+
+setInterval(() => moverHero(1), 4200);
+
+const elementosAnimados = document.querySelectorAll('section, .card, .level, .hit-box, form');
+
+const observador = new IntersectionObserver((entradas) => {
+  entradas.forEach((entrada) => {
+    if (entrada.isIntersecting) {
+      entrada.target.classList.add('show');
+    }
+  });
+}, { threshold: 0.15 });
+
+elementosAnimados.forEach((elemento) => {
+  elemento.classList.add('animate');
+  observador.observe(elemento);
+});
+
+function moverCarrossel(direcao) {
+  const carrossel = document.getElementById('carrosselEventos');
+  const cards = carrossel.children;
+  const largura = 382;
+
+  carrossel.style.transform = `translateX(${direcao * -18}px)`;
+  setTimeout(() => {
+    carrossel.style.transform = 'translateX(0px)';
+  }, 180);
+
+  carrossel.scrollBy({ left: direcao * largura, behavior: 'smooth' });
+}
+</script>
+</body>
+</html>
