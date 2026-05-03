@@ -1337,9 +1337,9 @@ scroll-behavior:smooth;
 </a>
 
 <nav>
-<a href="#sobre">Sobre</a>
-<a href="#experiencias">Experiências</a>
+<a href="#sobre">Nossa História</a>
 <a href="#eventos">Eventos</a>
+<a href="#experiencias">Experiências</a>
 <a href="#niveis">Níveis</a>
 <a href="#cadastro">Entrar</a>
 </nav>
@@ -1866,8 +1866,9 @@ document.querySelectorAll('a[href^="#"]').forEach((link) => {
     const elemento = document.querySelector(destino);
 
     if (elemento) {
-      scrollSuavePara(elemento.offsetTop - 100);
-    }
+  const distancia = elemento.getBoundingClientRect().top + window.pageYOffset - 90;
+  scrollSuavePara(distancia);
+}
   });
 });
 </script>
