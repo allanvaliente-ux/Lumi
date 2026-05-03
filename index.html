@@ -862,6 +862,44 @@ text-decoration:none;
 .termos-check a:hover{
 text-decoration:underline;
 }
+button, .btn{
+position:relative;
+overflow:hidden;
+}
+
+button::after, .btn::after{
+content:"";
+position:absolute;
+inset:-2px;
+background:linear-gradient(90deg,#7c3aed,#a855f7,#38bdf8);
+filter:blur(18px);
+opacity:0;
+z-index:-1;
+transition:0.35s;
+}
+
+button:hover::after, .btn:hover::after{
+opacity:0.75;
+}
+
+.outro-evento{
+max-height:0;
+opacity:0;
+overflow:hidden;
+margin-top:0;
+padding-top:0;
+padding-bottom:0;
+transform:translateY(-8px);
+transition:all 0.35s ease;
+}
+
+.outro-evento.show{
+max-height:70px;
+opacity:1;
+margin-top:12px;
+padding:15px 16px;
+transform:translateY(0);
+}
 </style>
 </head>
 
@@ -1176,7 +1214,7 @@ No LUMI, cada evento começa antes do encontro. O aplicativo cria expectativa, s
 <option>Escape Room</option>
 <option>Eventos secretos</option>
 <option value="outros">Outros</option>
-<input type="text" id="outroEvento" placeholder="Digite sua sugestão" style="display:none;margin-top:12px;">
+<input type="text" id="outroEvento" class="outro-evento" placeholder="Digite sua sugestão">
 </select>
 </div>
 
@@ -1321,13 +1359,16 @@ function moverCarrossel(direcao) {
 
   carrossel.scrollBy({ left: direcao * largura, behavior: 'smooth' });
 }
-const eventoSelect = document.querySelector('select[name="evento"]');
-const outroEvento = document.getElementById('outroEvento');
+const eventoSelect = document.getElementById("eventoSelect");
+const outroEvento = document.getElementById("outroEvento");
 
-if(eventoSelect && outroEvento){
-  eventoSelect.addEventListener('change', () => {
-    outroEvento.style.display = eventoSelect.value === 'outros' ? 'block' : 'none';
-  });
+eventoSelect.addEventListener("change", function(){
+if(this.value === "outros"){
+outroEvento.classList.add("show");
+}else{
+outroEvento.classList.remove("show");
+}
+});
 }
 </script>
 </body>
