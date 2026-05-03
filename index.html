@@ -1331,7 +1331,7 @@ scroll-behavior:smooth;
 <body>
 
 <header>
-<a href="#" class="logo-area" onclick="window.scrollTo({top:0, behavior:'smooth'}); return false;">
+<a href="#" class="logo-area">
 <img src="lumi-logo.png" alt="Logo LUMI">
 <span>LUMI</span>
 </a>
@@ -1828,6 +1828,33 @@ if(generoSelect && outroGenero){
 
   });
 }
+
+document.querySelectorAll('a[href^="#"]').forEach((link) => {
+  link.addEventListener("click", function (e) {
+    e.preventDefault();
+
+    const destino = this.getAttribute("href");
+
+    if (destino === "#") {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+      return;
+    }
+
+    const elemento = document.querySelector(destino);
+
+    if (elemento) {
+      const distancia = elemento.offsetTop - 100;
+
+      window.scrollTo({
+        top: distancia,
+        behavior: "smooth"
+      });
+    }
+  });
+});
 </script>
 </body>
 </html>
