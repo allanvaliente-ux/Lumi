@@ -1835,12 +1835,12 @@ function moverCarrossel(direcao) {
 const carrossel = document.getElementById('carrosselEventos');
 const largura = 382;
 
-carrossel.style.transition = "transform 0.45s ease";
-carrossel.style.transform = `translateX(${direcao * -22}px)`;
+carrossel.style.transition = "transform 0.85s cubic-bezier(0.22,1,0.36,1)";
+carrossel.style.transform = `translateX(${direcao * -30}px)`;
 
 setTimeout(() => {
 carrossel.style.transform = "translateX(0px)";
-}, 450);
+}, 750);
 
 carrossel.scrollBy({
 left: direcao * largura,
