@@ -805,6 +805,63 @@ display:none;
 height:350px;
 }
 }
+
+.termos-box{
+margin:18px 0 18px;
+padding:16px 18px;
+border-radius:18px;
+background:rgba(255,255,255,0.04);
+border:1px solid rgba(196,181,253,0.16);
+}
+
+.termos-check{
+display:flex;
+align-items:center;
+gap:12px;
+color:#d8d4f2;
+font-size:0.9rem;
+line-height:1.4;
+cursor:pointer;
+}
+
+.termos-check input[type="checkbox"]{
+appearance:none;
+width:20px;
+height:20px;
+min-width:20px;
+padding:0;
+border-radius:6px;
+background:#070716;
+border:1px solid rgba(196,181,253,0.45);
+outline:none;
+cursor:pointer;
+position:relative;
+}
+
+.termos-check input[type="checkbox"]:checked{
+background:linear-gradient(135deg,#7c3aed,#38bdf8);
+border-color:#a855f7;
+}
+
+.termos-check input[type="checkbox"]:checked::after{
+content:"✓";
+position:absolute;
+color:#fff;
+font-size:14px;
+font-weight:bold;
+left:4px;
+top:0px;
+}
+
+.termos-check a{
+color:#c084fc;
+font-weight:bold;
+text-decoration:none;
+}
+
+.termos-check a:hover{
+text-decoration:underline;
+}
 </style>
 </head>
 
