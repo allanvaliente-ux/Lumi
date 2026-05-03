@@ -1218,7 +1218,7 @@ No LUMI, cada evento começa antes do encontro. O aplicativo cria expectativa, s
 <option value="outros">Outros</option>
 </select>
 
-<input type="text" id="outroEvento" class="outro-evento" placeholder="Digite sua sugestão">
+<input type="text" id="outroEvento" placeholder="Digite sua sugestão" style="display:none;">
 
 </div>
 
@@ -1366,12 +1366,12 @@ function moverCarrossel(direcao) {
 const eventoSelect = document.getElementById("eventoSelect");
 const outroEvento = document.getElementById("outroEvento");
 
-eventoSelect.addEventListener("change", function(){
-if(this.value === "outros"){
-outroEvento.classList.add("show");
-}else{
-outroEvento.classList.remove("show");
-}
+eventoSelect.addEventListener("change", function () {
+  if (this.value === "outros") {
+    outroEvento.style.display = "block";
+  } else {
+    outroEvento.style.display = "none";
+  }
 });
 }
 </script>
