@@ -1829,6 +1829,29 @@ if(generoSelect && outroGenero){
   });
 }
 
+function scrollSuavePara(destino, duracao = 900) {
+  const inicio = window.pageYOffset;
+  const distancia = destino - inicio;
+  let inicioTempo = null;
+
+  function animarScroll(tempoAtual) {
+    if (!inicioTempo) inicioTempo = tempoAtual;
+
+    const tempoPassado = tempoAtual - inicioTempo;
+    const progresso = Math.min(tempoPassado / duracao, 1);
+
+    const suavizar = 1 - Math.pow(1 - progresso, 3);
+
+    window.scrollTo(0, inicio + distancia * suavizar);
+
+    if (tempoPassado < duracao) {
+      requestAnimationFrame(animarScroll);
+    }
+  }
+
+  requestAnimationFrame(animarScroll);
+}
+
 document.querySelectorAll('a[href^="#"]').forEach((link) => {
   link.addEventListener("click", function (e) {
     e.preventDefault();
@@ -1836,22 +1859,14 @@ document.querySelectorAll('a[href^="#"]').forEach((link) => {
     const destino = this.getAttribute("href");
 
     if (destino === "#") {
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-      });
+      scrollSuavePara(0);
       return;
     }
 
     const elemento = document.querySelector(destino);
 
     if (elemento) {
-      const distancia = elemento.offsetTop - 100;
-
-      window.scrollTo({
-        top: distancia,
-        behavior: "smooth"
-      });
+      scrollSuavePara(elemento.offsetTop - 100);
     }
   });
 });
