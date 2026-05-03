@@ -14,7 +14,8 @@ margin:0;
 padding:0;
 box-sizing:border-box;
 font-family:'Poppins', sans-serif;
-scroll-behavior:smooth;transition:transform 0.45s ease;
+scroll-behavior:smooth;
+transition:transform 0.45s ease;
 }
 
 body{
@@ -1309,17 +1310,28 @@ filter:brightness(1.08);
 display:none;
 }
 }
-  
+
+.logo-area{
+text-decoration:none;
+color:#fff;
+cursor:pointer;
+transition:0.3s ease;
+}
+
+.logo-area:hover{
+transform:scale(1.03);
+}
+
 </style>
 </head>
 
 <body>
 
 <header>
-<div class="logo-area">
+<a href="#" class="logo-area">
 <img src="lumi-logo.png" alt="Logo LUMI">
 <span>LUMI</span>
-</div>
+</a>
 
 <nav>
 <a href="#sobre">Sobre</a>
