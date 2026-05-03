@@ -1054,17 +1054,19 @@ flex-direction:column;
 text-align:center;
 }
 
-footer a{
-transition:0.3s ease;
-display:inline-block;
+footer a,
+footer a:visited{
+color:#d1d5db !important;
+transition:all 0.3s ease !important;
+display:block !important;
 }
 
 footer a:hover{
 color:#c084fc !important;
-transform:translateY(-3px);
+transform:translateY(-4px) scale(1.05) !important;
 text-shadow:
-0 0 8px rgba(192,132,252,0.6),
-0 0 18px rgba(168,85,247,0.35);
+0 0 8px rgba(192,132,252,0.75),
+0 0 18px rgba(168,85,247,0.45) !important;
 }
 
 </style>
