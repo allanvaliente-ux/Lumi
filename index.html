@@ -1229,7 +1229,7 @@ No LUMI, cada evento começa antes do encontro. O aplicativo cria expectativa, s
 <option value="outroGenero">Outro</option>
 </select>
 
-<input type="text" id="outroGenero" placeholder="Digite como você se identifica" style="display:none;margin-top:12px;">
+<input type="text" id="outroGenero" class="outro-evento" placeholder="Digite como você se identifica">
 </div>
 
 <div class="form-group">
@@ -1432,7 +1432,15 @@ const outroGenero = document.getElementById("outroGenero");
 
 if(generoSelect && outroGenero){
   generoSelect.addEventListener("change", function(){
-    outroGenero.style.display = this.value === "outroGenero" ? "block" : "none";
+
+    if(this.value === "outroGenero"){
+      outroGenero.classList.add("show");
+      outroGenero.focus();
+    }else{
+      outroGenero.classList.remove("show");
+      outroGenero.value = "";
+    }
+
   });
 }
 </script>
