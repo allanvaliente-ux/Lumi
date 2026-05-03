@@ -1281,7 +1281,35 @@ transition:0.35s ease;
 .hit-benefit:hover{
 transform:translateY(-10px) scale(1.05);
 }
+.header-cta{
+margin-left:auto;
+padding:12px 22px;
+border-radius:999px;
+text-decoration:none;
+font-weight:700;
+font-size:0.95rem;
+color:#fff;
+background:linear-gradient(90deg,#7c3aed,#a855f7,#38bdf8);
+box-shadow:0 0 18px rgba(168,85,247,.22);
+transition:0.35s ease;
+display:inline-flex;
+align-items:center;
+justify-content:center;
+white-space:nowrap;
+}
 
+.header-cta:hover{
+transform:translateY(-3px) scale(1.03);
+box-shadow:0 0 28px rgba(168,85,247,.45);
+filter:brightness(1.08);
+}
+
+  @media (max-width:768px){
+.header-cta{
+display:none;
+}
+}
+  
 </style>
 </head>
 
@@ -1300,6 +1328,9 @@ transform:translateY(-10px) scale(1.05);
 <a href="#niveis">Níveis</a>
 <a href="#cadastro">Entrar</a>
 </nav>
+  
+<a href="#cadastro" class="header-cta">Quero participar</a>
+  
 </header>
 
 <section class="hero">
