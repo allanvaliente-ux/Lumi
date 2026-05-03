@@ -1832,16 +1832,20 @@ elementosAnimados.forEach((elemento) => {
 });
 
 function moverCarrossel(direcao) {
-  const carrossel = document.getElementById('carrosselEventos');
-  const cards = carrossel.children;
-  const largura = 382;
+const carrossel = document.getElementById('carrosselEventos');
+const largura = 382;
 
-  carrossel.style.transform = `translateX(${direcao * -18}px)`;
-  setTimeout(() => {
-    carrossel.style.transform = 'translateX(0px)';
-  }, 180);
+carrossel.style.transition = "transform 0.45s ease";
+carrossel.style.transform = `translateX(${direcao * -22}px)`;
 
-  carrossel.scrollBy({ left: direcao * largura, behavior: 'smooth' });
+setTimeout(() => {
+carrossel.style.transform = "translateX(0px)";
+}, 450);
+
+carrossel.scrollBy({
+left: direcao * largura,
+behavior: "smooth"
+});
 }
 document.addEventListener("DOMContentLoaded", function () {
   const eventoSelect = document.getElementById("eventoSelect");
