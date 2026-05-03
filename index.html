@@ -1177,6 +1177,63 @@ font-family:'Poppins', sans-serif;
 letter-spacing:-1px;
 }
 
+.hit-box{
+position:relative;
+overflow:hidden;
+border:1px solid rgba(192,132,252,0.45) !important;
+box-shadow:
+0 0 30px rgba(168,85,247,0.25),
+0 0 80px rgba(56,189,248,0.12),
+0 35px 120px rgba(0,0,0,0.55) !important;
+transform:scale(1.02);
+}
+
+.hit-box::before{
+content:"";
+position:absolute;
+top:-120px;
+left:-120px;
+width:280px;
+height:280px;
+background:radial-gradient(circle,rgba(192,132,252,0.25),transparent 70%);
+pointer-events:none;
+}
+
+.hit-box::after{
+content:"";
+position:absolute;
+bottom:-140px;
+right:-120px;
+width:320px;
+height:320px;
+background:radial-gradient(circle,rgba(56,189,248,0.18),transparent 70%);
+pointer-events:none;
+}
+
+.hit-box h3{
+font-size:6rem !important;
+text-shadow:
+0 0 18px rgba(192,132,252,0.45),
+0 0 35px rgba(56,189,248,0.25);
+}
+
+.hit-badge{
+background:rgba(255,255,255,0.05);
+backdrop-filter:blur(10px);
+border:1px solid rgba(255,255,255,0.22);
+box-shadow:0 0 18px rgba(192,132,252,0.18);
+}
+
+.hit-benefit{
+transition:0.35s ease;
+}
+
+.hit-benefit:hover{
+transform:translateY(-8px) scale(1.03);
+border-color:#c084fc;
+box-shadow:0 0 22px rgba(192,132,252,0.22);
+}
+
 </style>
 </head>
 
