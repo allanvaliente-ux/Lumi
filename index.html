@@ -1071,6 +1071,49 @@ text-shadow:
 0 0 18px rgba(168,85,247,0.45) !important;
 }
 
+@media (max-width:768px){
+
+#carrosselEventos{
+overflow-x:auto !important;
+padding:15px 48px 25px !important;
+}
+
+#carrosselEventos > div{
+min-width:280px !important;
+height:360px !important;
+}
+
+#carrosselEventos img{
+width:100% !important;
+height:100% !important;
+object-fit:cover !important;
+}
+
+#carrosselEventos > div > div{
+display:flex !important;
+align-items:flex-end !important;
+min-height:130px !important;
+font-size:1.25rem !important;
+line-height:1.2 !important;
+z-index:5 !important;
+}
+
+#eventos button[onclick="moverCarrossel(-1)"]{
+left:4px !important;
+width:42px !important;
+height:82px !important;
+font-size:2.2rem !important;
+}
+
+#eventos button[onclick="moverCarrossel(1)"]{
+right:4px !important;
+width:42px !important;
+height:82px !important;
+font-size:2.2rem !important;
+}
+
+}
+
 </style>
 </head>
 
