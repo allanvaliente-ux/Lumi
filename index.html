@@ -1166,7 +1166,7 @@ No LUMI, cada evento começa antes do encontro. O aplicativo cria expectativa, s
 
 <div class="form-group">
 <label>Evento favorito</label>
-<select>
+<select name="evento" id="eventoSelect">
 <option>Escolha uma categoria</option>
 <option>Bares & Drinks</option>
 <option>Festivais</option>
@@ -1175,6 +1175,8 @@ No LUMI, cada evento começa antes do encontro. O aplicativo cria expectativa, s
 <option>Trilhas</option>
 <option>Escape Room</option>
 <option>Eventos secretos</option>
+<option value="outros">Outros</option>
+<input type="text" id="outroEvento" placeholder="Digite sua sugestão" style="display:none;margin-top:12px;">
 </select>
 </div>
 
@@ -1318,6 +1320,14 @@ function moverCarrossel(direcao) {
   }, 180);
 
   carrossel.scrollBy({ left: direcao * largura, behavior: 'smooth' });
+}
+const eventoSelect = document.querySelector('select[name="evento"]');
+const outroEvento = document.getElementById('outroEvento');
+
+if(eventoSelect && outroEvento){
+  eventoSelect.addEventListener('change', () => {
+    outroEvento.style.display = eventoSelect.value === 'outros' ? 'block' : 'none';
+  });
 }
 </script>
 </body>
